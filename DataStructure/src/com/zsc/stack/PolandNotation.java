@@ -25,8 +25,6 @@ public class PolandNotation {
         int i = calculate(suffixExpressionList);
         System.out.println(i);
 
-
-
         /*
         //先定义给逆波兰表达式
         //为了方便，逆波兰表达式的数字和符号使用空格隔开
