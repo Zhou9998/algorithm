@@ -1,77 +1,81 @@
 package com.zsc.tree;
 
 /**
- * 二叉树
+ * 线索化二叉树
  *
  * @author zsc
- * @date 2021/4/20 12:50
+ * @date 2021/4/20 17:53
  */
-public class BinaryTreeDemo {
+public class ThreadedBinaryTreeDemo {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
-        HeroNode root = new HeroNode(1, "宋江");
-        HeroNode heroNode2 = new HeroNode(2, "卢俊义");
-        HeroNode heroNode3 = new HeroNode(3, "吴用");
-        HeroNode heroNode4 = new HeroNode(4, "公孙胜");
-        HeroNode heroNode5 = new HeroNode(5, "关胜");
+        HeroNode root = new HeroNode(1, "tom");
+        HeroNode node2 = new HeroNode(3, "jack");
+        HeroNode node3 = new HeroNode(6, "smith");
+        HeroNode node4 = new HeroNode(8, "mary");
+        HeroNode node5 = new HeroNode(10, "king");
+        HeroNode node6 = new HeroNode(14, "dim");
+        //二叉树，后面我们要递归创建, 现在简单处理使用手动创建
+        root.setLeft(node2);
+        root.setRight(node3);
+        node2.setLeft(node4);
+        node2.setRight(node5);
+        node3.setLeft(node6);
 
-        //手动创建二叉树
-        tree.setRoot(root);
-        root.setLeft(heroNode2);
-        root.setRight(heroNode3);
-        heroNode3.setRight(heroNode4);
-        heroNode3.setLeft(heroNode5);
+        //测试中序线索化
+        ThreadedBinaryTree threadedBinaryTree = new ThreadedBinaryTree();
+        threadedBinaryTree.setRoot(root);
+        threadedBinaryTree.threadedNodes();
 
-        /*
-        //测试
-        System.out.println("前序遍历");
-        tree.preOrder();    //前序遍历
-        System.out.println("中序遍历");
-        tree.infixOrder();    //中序遍历
-        System.out.println("后序遍历");
-        tree.postOrder();    //后序遍历
-         */
-
-        /*
-        //前序查找
-        System.out.println("前序查找");
-        HeroNode node1 = tree.preOrderSearch(15);
-        if (node1 != null) {
-            System.out.println("信息为no=" + node1.getNo() + "，name=" + node1.getName());
-        } else {
-            System.out.println("没有找到no=" + 15 + "的节点");
-        }
-        //中序查找
-        System.out.println("中序查找");
-        HeroNode node2 = tree.infixOrderSearch(5);
-        if (node2 != null) {
-            System.out.println("信息为no=" + node2.getNo() + "，name=" + node2.getName());
-        } else {
-            System.out.println("没有找到no=" + 15 + "的节点");
-        }
-        //后续查找
-        System.out.println("后序查找");
-        HeroNode node3 = tree.postOrderSearch(5);
-        if (node3 != null) {
-            System.out.println("信息为no=" + node3.getNo() + "，name=" + node3.getName());
-        } else {
-            System.out.println("没有找到no=" + 15 + "的节点");
-        }
-        */
-        System.out.println("删除前前序遍历");
-        tree.preOrder();
-        tree.delNode(5);
-        System.out.println("删除后前序遍历");
-        tree.preOrder();
+        //测试: 以10号节点测试
+        HeroNode leftNode = node5.getLeft();
+        HeroNode rightNode = node5.getRight();
+        System.out.println("10号结点的前驱结点是 =" + leftNode); //3
+        System.out.println("10号结点的后继结点是=" + rightNode); //1
     }
 }
 
-//定义BinaryTree二叉树
-class BinaryTree {
+class ThreadedBinaryTree {
     private HeroNode root;
+    //为了实现线索化，需要创建一个指向当前节点的前驱结点的指针
+    private HeroNode pre = null;
 
     public void setRoot(HeroNode root) {
         this.root = root;
+    }
+
+    public void threadedNodes() {
+        this.threadedNodes(root);
+    }
+    //编写对二叉树进行中序线索化的方法
+
+    /**
+     * @param node 当前需要线索化的节点
+     */
+    public void threadedNodes(HeroNode node) {
+        if (node == null) {
+            return;
+        }
+        //1.先线索化左子树
+        threadedNodes(node.getLeft());
+        //2.线索化当前节点
+        //处理前驱结点
+        if (node.getLeft() == null) {
+            //让当前节点的左指针指向前驱结点
+            node.setLeft(pre);
+            //修改当前节点的左指针类型
+            node.setLeftType(1);
+        }
+        //处理后继结点
+        if (pre != null && pre.getRight() == null) {
+            //让前驱节点的右指针指向当前节点
+            pre.setRight(node);
+            //修改前驱结点的右指针类型
+            pre.setRightType(1);
+        }
+        //每处理一个节点后，让当前节点是下一个节点的前驱结点
+        pre = node;
+        //3.再线索化右子树
+        threadedNodes(node.getRight());
     }
 
     //前序遍历
