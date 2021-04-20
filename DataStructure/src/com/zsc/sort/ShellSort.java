@@ -25,6 +25,7 @@ public class ShellSort {
         String date2Str = simpleDateFormat.format(date2);
         System.out.println(date2Str);
         System.out.println(Arrays.toString(arr));
+
     }
 
     //对交换式希尔排序进行优化->移位法
