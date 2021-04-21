@@ -72,8 +72,8 @@ class ThreadedBinaryTree {
             node = node.getRight();
         }
     }
-    //编写对二叉树进行中序线索化的方法
 
+    //编写对二叉树进行中序线索化的方法
     /**
      * @param node 当前需要线索化的节点
      */
