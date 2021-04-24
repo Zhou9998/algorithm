@@ -1,32 +1,34 @@
-package com.zsc.binarysorttree;
+package com.zsc.avl;
 
 /**
- * 二叉排序树
+ * 平衡二叉树
  *
  * @author zsc
- * @date 2021/4/22 20:50
+ * @date 2021/4/23 19:57
  */
-public class BinarySortTreeDemo {
+public class AVLTreeDemo {
     public static void main(String[] args) {
-        int[] arr = {7, 3, 10, 12, 5, 1, 9, 2};
-        BinarySortTree binarySortTree = new BinarySortTree();
-        //循环添加节点到二叉排序树
-        for (int a : arr) {
-            binarySortTree.add(new Node(a));
+        //  int[] arr = {4, 3, 6, 5, 7, 8};
+        //  int[] arr = {10, 12, 8, 9, 7, 6};
+        int[] arr = { 10, 11, 7, 6, 8, 9 };
+        //创建一个AVLTree对象
+        AVLTree avlTree = new AVLTree();
+        //添加节点
+        for (int i = 0; i < arr.length; i++) {
+            avlTree.add(new Node(arr[i]));
         }
-
-        //中序遍历二叉排序树
-        binarySortTree.infixOrder();
-
-        //测试删除叶子节点
-        binarySortTree.delNode(2);
-        System.out.println("删除后的二叉树");
-        binarySortTree.infixOrder();
+        //遍历
+        System.out.println("中序遍历");
+        avlTree.infixOrder();
+        System.out.println("在没有做平衡之前");
+        System.out.println("树的高度：" + avlTree.getRoot().height());
+        System.out.println("左子树的高度：" + avlTree.getRoot().leftHeight());
+        System.out.println("右子树的高度：" + avlTree.getRoot().rightHeight());
     }
 }
 
-//创建二叉排序树
-class BinarySortTree {
+//创建AVL树
+class AVLTree {
     private Node root;
 
     public void add(Node node) {
@@ -35,6 +37,10 @@ class BinarySortTree {
         } else {
             root.add(node);
         }
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
     //中序遍历
@@ -147,6 +153,59 @@ class Node {
         this.value = value;
     }
 
+    //返回左子树的高度
+    public int leftHeight() {
+        if (left == null) {
+            return 0;
+        }
+        return left.height();
+    }
+
+    //返回右子树的高度
+    public int rightHeight() {
+        if (right == null) {
+            return 0;
+        }
+        return right.height();
+    }
+
+    //返回以该节点为根节点的树的高度
+    public int height() {
+        return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
+    }
+
+    //左旋转方法
+    private void leftRotate() {
+        //创建新的节点，以当前根节点的值
+        Node newNode = new Node(this.value);
+        //把新的节点的左子树设置为当前节点的左子树
+        newNode.left = this.left;
+        //把新的节点的右子树设置成当前节点的右子树的左子树
+        newNode.right = this.right.left;
+        //把当前节点的值替换成右子树的值
+        this.value = this.right.value;
+        //把当前结点的右子树设置成当前结点右子树的右子树
+        this.right = this.right.right;
+        //把当前结点的左子树(左子结点)设置成新的结点
+        this.left = newNode;
+    }
+
+    //右旋转方法
+    private void rightRotate() {
+        //创建新的节点，以当前根节点的值
+        Node newNode = new Node(this.value);
+        //把新的节点的右子树设置为当前节点的右子树
+        newNode.right = this.right;
+        //把新的节点的左子树设置成当前节点的左子树的右子树
+        newNode.left = this.left.right;
+        //把当前节点的值替换成左子树的值
+        this.value = this.left.value;
+        //把当前结点的左子树设置成当前结点左子树的左子树
+        this.left = this.left.left;
+        //把当前结点的右子树(右子结点)设置成新的结点
+        this.right = newNode;
+    }
+
     /**
      * 查找要删除的结点
      *
@@ -209,6 +268,29 @@ class Node {
             } else {
                 this.right.add(node);    //递归的去右子树添加
             }
+        }
+        //当添加完一个节点后，如果右子树的高度-左子树的高度 > 1，左旋转
+        if (rightHeight() - leftHeight() > 1) {
+            if (right != null && right.rightHeight() < right.leftHeight()) {
+                //先对当前节点的右节点(右子树)进行右旋转
+                this.right.rightRotate();
+                leftRotate();
+            } else {
+                leftRotate();
+            }
+            return;
+        }
+        //当添加完一个节点后，如果左子树的高度-右子树的高度 > 1，左旋转
+        if (leftHeight() - rightHeight() > 1) {
+            //如果它的左子树的右子树的高度>它的左子树的左子树的高度
+            if (this.left != null && this.left.rightHeight() > this.left.leftHeight()) {
+                //先对当前节点的左节点(左子树)进行左旋转
+                this.left.leftRotate();
+                rightRotate();
+            } else {
+                rightRotate();
+            }
+            return;
         }
     }
 

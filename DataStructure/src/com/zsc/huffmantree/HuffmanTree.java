@@ -15,14 +15,16 @@ public class HuffmanTree {
         Node root = createHuffmanTree(arr);
         preOrder(root);
     }
+
     //前序遍历
-    public static void preOrder(Node root){
-        if (root != null){
+    public static void preOrder(Node root) {
+        if (root != null) {
             root.preOrder();
-        }else {
+        } else {
             System.out.println("该赫夫曼树是空树");
         }
     }
+
     public static Node createHuffmanTree(int[] arr) {
         //1.遍历arr数组
         //2.将arr的每个元素构建成一个node
@@ -65,23 +67,24 @@ class Node implements Comparable<Node> {
     public Node(int value) {
         this.value = value;
     }
+
     //前序遍历
-    public void preOrder(){
+    public void preOrder() {
         System.out.println(this);
-        if (this.left != null){
+        if (this.left != null) {
             this.left.preOrder();
         }
-        if (this.right != null){
+        if (this.right != null) {
             this.right.preOrder();
         }
     }
+
     @Override
     public String toString() {
         return "Node{" +
                 "value=" + value +
                 '}';
     }
-
 
     @Override
     public int compareTo(Node node) {
