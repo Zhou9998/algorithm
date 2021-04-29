@@ -41,7 +41,7 @@ public class HorseChessboard {
     }
 
     /**
-     * 完成其实周游问题的算法
+     * 完成骑士周游问题的算法
      *
      * @param chessboard
      * @param row        马儿当前位置的行 从0开始
