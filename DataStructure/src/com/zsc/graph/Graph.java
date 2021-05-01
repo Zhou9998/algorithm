@@ -44,8 +44,8 @@ public class Graph {
         graph.insertEdge(2, 5, 1);
         graph.insertEdge(2, 6, 1);
         graph.insertEdge(5, 6, 1);
-
         //显示邻结矩阵
+
         graph.showGraph();
 
         //测试dfs遍历
