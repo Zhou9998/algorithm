@@ -39,8 +39,6 @@ public class Queen {
                 check(chars, arr, x + 1, n);
                 chars[x][i] = '.' ;
             }
-
-
         }
     }
 

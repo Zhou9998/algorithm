@@ -51,9 +51,9 @@ public class HeapSort {
         //System.out.println(Arrays.toString(arr));
     }
 
-    //将一个数组(二叉树)，调整成一个大顶堆
-
     /**
+     * 将一个数组(二叉树)，调整成一个大顶堆
+     *
      * @param arr    待调整的数组
      * @param i      表示非叶子节点在数组中的索引
      * @param length 表示对多少个元素继续调整

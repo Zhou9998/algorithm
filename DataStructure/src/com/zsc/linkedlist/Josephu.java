@@ -6,7 +6,7 @@ package com.zsc.linkedlist;
  * @author zsc
  * @date 2021/4/14 18:49
  */
-public class Josepfu {
+public class Josephu {
     public static void main(String[] args) {
         CircleSingleLinkedList circleSingleLinkedList = new CircleSingleLinkedList();
         circleSingleLinkedList.boyAdd(25);
@@ -61,9 +61,9 @@ class CircleSingleLinkedList {
         }
     }
 
-    //根据用户输入,计算出出圈顺序
-
     /**
+     * 根据用户输入,计算出出圈顺序
+     *
      * @param startNo  表示从第几个节点开始
      * @param countNum 表示数几下
      * @param nums     表示有多少节点在链表中

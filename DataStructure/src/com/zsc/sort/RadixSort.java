@@ -49,7 +49,7 @@ public class RadixSort {
             //定义一个二维数组，表示10个桶
             int[][] buckets = new int[10][arr.length];
 
-            //为了记录每个桶中，实际存放了多少个数据，定义一个一位数组来记录各个桶每次放入的数据
+            //为了记录每个桶中，实际存放了多少个数据，定义一个一维数组来记录各个桶每次放入的数据
             int[] bucketElementCounts = new int[10];
 
             for (int j = 0; j < arr.length; j++) {

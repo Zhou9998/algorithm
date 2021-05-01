@@ -275,7 +275,7 @@ class Node {
                 //先对当前节点的右节点(右子树)进行右旋转
                 this.right.rightRotate();
                 leftRotate();
-            } else {
+            }  else {
                 leftRotate();
             }
             return;

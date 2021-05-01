@@ -260,7 +260,7 @@ class SingleLinkedList {
             System.out.println("准备插入的英雄的" + heroNode.no + "已经存在");
         } else {
             //插入到链表中，temp的后面
-            heroNode.next = temp.next;
+            heroNode.next = temp.next;  //注意temp.next == null的情况
             temp.next = heroNode;
         }
     }

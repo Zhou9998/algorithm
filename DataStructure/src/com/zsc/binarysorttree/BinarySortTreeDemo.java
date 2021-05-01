@@ -71,7 +71,7 @@ class BinarySortTree {
     public int delRightTreeMin(Node right) {
         Node target = right;
         //循环查找左节点
-        if (target.left != null) {
+        while (target.left != null) {
             target = target.left;
         }
         delNode(target.value);

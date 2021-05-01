@@ -15,7 +15,6 @@ public class SelectSort {
         for (int i = 0; i < 80000; i++) {
             arr[i] = (int) (Math.random() * 80000);
         }
-
         Date date1 = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date1Str = simpleDateFormat.format(date1);

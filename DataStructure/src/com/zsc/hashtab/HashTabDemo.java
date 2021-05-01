@@ -91,10 +91,10 @@ class HashTab {
 
     //根据输入的id，查找雇员
     public void findEmpById(int id) {
-        int empLinkedListNO = hashFun(id);
-        Emp emp = empLinkedListArray[empLinkedListNO].findEmpById(id);
+        int empLinkedListNo = hashFun(id);
+        Emp emp = empLinkedListArray[empLinkedListNo].findEmpById(id);
         if (emp != null) {
-            System.out.println("在第" + (empLinkedListNO + 1) + "条链表中，找到雇员id=" + id);
+            System.out.println("在第" + (empLinkedListNo + 1) + "条链表中，找到雇员id=" + id);
         } else {
             System.out.println("在哈希表中，没有找到该雇员");
         }

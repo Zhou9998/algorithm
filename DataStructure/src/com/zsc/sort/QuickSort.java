@@ -1,6 +1,7 @@
 package com.zsc.sort;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * 快速排序
@@ -10,8 +11,8 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        int[] arr = {-9, 78, 0, 23, -567, 70};
-        quickSort(arr, 0, arr.length - 1);
+        int[] arr = {-9, 78, 0, 23, -567, 70,10};
+        quickSort2(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
 
@@ -64,4 +65,64 @@ public class QuickSort {
             quickSort(arr, l, right);
         }
     }
+
+
+    /**
+     * 左右指针法
+     * @param arr
+     * @param l
+     * @param r
+     */
+    public static void quickSort2(int[] arr, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+        int temp = arr[l], i = l, j = r;
+        while (i < j) {
+            while (i < j && arr[j] >= temp) {
+                j--;
+            }
+            while (i < j && arr[i] <= temp) {
+                i++;
+            }
+            if (i < j) {
+                int t = arr[i];
+                arr[i] = arr[j];
+                arr[j] = t;
+            }
+        }
+        arr[l] = arr[i];
+        arr[i] = temp;
+        quickSort2(arr, l, i - 1);
+        quickSort2(arr, j + 1, r);
+    }
+
+    /**
+     * 填坑法
+     * @param array
+     * @param left
+     * @param right
+     */
+    public static void quickSort3(int[] array, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int  l = left, r = right,key = array[l];
+        while (l < r) {
+            while (l < r && array[r] >= key) {
+                r--;
+            }
+            array[l] = array[r];
+            while (l < r && array[l] <= key) {
+                l++;
+            }
+            array[r] = array[l];
+        }
+        array[l] = key;
+
+        quickSort3(array, left, l - 1);
+        quickSort3(array, l + 1, right);
+    }
+
 }
+

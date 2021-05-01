@@ -32,8 +32,7 @@ public class Calculator {
                     //如果符号栈有操作符，就进行比较,如果当前的操作符的优先级小于或者等于栈中的操作符
                     if (operStack.priority(ch) <= operStack.priority(operStack.peek())) {
                         num1 = numStack.pop();
-                        num2 =  
-                                numStack.pop();
+                        num2 = numStack.pop();
                         oper = operStack.pop();
                         res = numStack.cal(num1, num2, oper);
                         numStack.push(res);
