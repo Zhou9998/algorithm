@@ -81,7 +81,7 @@ public class ShellSort {
         }
         System.out.println("希尔排序第一轮" + Arrays.toString(arrs));
 
-        //希尔排序第一轮,将10个数据分成了5组
+        //希尔排序第二轮,将10个数据分成了2组
         for (int i = 2; i < arrs.length; i++) {
             //遍历各组中所有的元素
             for (int j = i - 2; j >= 0; j -= 2) {
@@ -95,7 +95,7 @@ public class ShellSort {
         }
         System.out.println("希尔排序第二轮" + Arrays.toString(arrs));
 
-        //希尔排序第一轮,将10个数据分成了5组
+        //希尔排序第三轮,将10个数据分成了1组
         for (int i = 1; i < arrs.length; i++) {
             //遍历各组中所有的元素
             for (int j = i - 1; j >= 0; j--) {
