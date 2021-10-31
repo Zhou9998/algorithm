@@ -106,8 +106,8 @@ class BinarySortTree {
                     parent.right = null;
                 }
             } else if (targetNode.left != null && targetNode.right != null) {  //要删除的节点有左右子树
-                int minVal = delRightTreeMin(targetNode.right);
-                targetNode.value = minVal;
+                int minVal = delRightTreeMin(targetNode.right);//找到target的右子树中的最小的左子节点
+                targetNode.value = minVal;//替代target的值，依然满足BST
             } else { //删除节点只有一个子树
                 //如果要删除的结点有左子结点
                 if (targetNode.left != null) {

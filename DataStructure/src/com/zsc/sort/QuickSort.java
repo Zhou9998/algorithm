@@ -11,7 +11,7 @@ import java.util.Comparator;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        int[] arr = {-9, 78, 0, 23, -567, 70,10};
+        int[] arr = {-9, 78, 0, 23, -567, 70, 10};
         quickSort2(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
     }
@@ -65,10 +65,9 @@ public class QuickSort {
             quickSort(arr, l, right);
         }
     }
-
-
     /**
      * 左右指针法
+     *
      * @param arr
      * @param l
      * @param r
@@ -99,6 +98,7 @@ public class QuickSort {
 
     /**
      * 填坑法
+     *
      * @param array
      * @param left
      * @param right
@@ -107,7 +107,7 @@ public class QuickSort {
         if (left >= right) {
             return;
         }
-        int  l = left, r = right,key = array[l];
+        int l = left, r = right, key = array[l];
         while (l < r) {
             while (l < r && array[r] >= key) {
                 r--;
@@ -119,10 +119,8 @@ public class QuickSort {
             array[r] = array[l];
         }
         array[l] = key;
-
         quickSort3(array, left, l - 1);
         quickSort3(array, l + 1, right);
     }
-
 }
 
